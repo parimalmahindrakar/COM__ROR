@@ -16,5 +16,17 @@
  * {
      margin: 0;
      padding: 0;
+
  }
+
+ td,th {
+     text-align: center !important;
+     
+ }
+
+td.address__of {
+    word-break: break-all;
+    width: 225px;
+    text-align: center;
+}
 
