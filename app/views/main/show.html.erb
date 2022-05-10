@@ -7,7 +7,14 @@
         <p class="lead"> <b>Phone No :</b> <%= @customer.phone %></p>
         <p class="lead"> <b>Address :</b> <%= @customer.address %></p>
         <hr>
-        <%= link_to "Go Back", root_path %>
+
+        <div class="d-flex justify-content-between">
+            <%= link_to "Edit", root_path %>  
+            <%= link_to "Go Back", root_path %>
+        </div>
+        <hr>
+        <h3 class="recent__orders"> Recent Orders</h3>
+        
        
 
         

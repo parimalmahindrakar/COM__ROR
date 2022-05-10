@@ -35,3 +35,10 @@ h1.add__customer__heading {
     font-weight: 300;
     
 }
+
+h3.recent__orders {
+    font-weight: 400;
+    color: #555;
+    text-align: center;
+
+}
