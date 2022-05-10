@@ -13,25 +13,51 @@ class MainController < ApplicationController
 
 
     def create
-        @customer = Customer.new
-        
-        if request.post?
-            @customer = Customer.new(customer_params)
-            if @customer.save
-                redirect_to root_path, notice: "Successfully created account !"
-            else
-                render 'new'
-            end
-        end 
-
+        @customer = Customer.new(customer_params)
+        if @customer.save
+            redirect_to root_path, notice: "Successfully created account !"
+        else
+            render 'new'
+        end
     end
-
-
 
     def show
-        # puts(params.require(:id))
         @customer = Customer.find_by(id: params.require(:id))
     end
+
+
+    # ==========================================
+    # Update
+
+    def edit   
+        @customer = Customer.find_by(id: params.require(:id))  
+    end  
+    
+    def update   
+        @customer = Customer.find_by(id: params.require(:format))    
+        if @customer.update_attributes(customer_params)   
+          flash[:notice] = 'Customer details updated!'   
+          redirect_to root_path   
+        else   
+          flash[:alert] = 'Failed to update details of customer!'   
+          render :edit   
+        end   
+    end
+
+    # ==========================================
+    # Delete
+
+
+    def destroy
+        @customer = Customer.find_by(id: params.require(:format))  
+        @customer.destroy
+        redirect_to(
+          root_path,
+          notice: 'Customer successfully deleted'
+        )
+    end
+
+    # ==========================================
 
 
     private

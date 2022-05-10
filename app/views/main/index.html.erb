@@ -3,7 +3,6 @@
 
 <div class=" my-3 d-flex justify-content-between">
 
-  <%# <a class="btn btn-info ">Add Customer</a> %>
   <%= link_to "Add Customer", add_customer_path, class: "btn btn-info"%>
   <div class="btn btn-info ">Add Order</div>
 
@@ -34,7 +33,7 @@
       <th scope="row"><%= cust.id %></th>
       <td> <a href=/show-customer/<%= cust.id %>> <%= cust.name%> </a> </td>
       <td><%= cust.email %> </td>
-      <td><%= cust.phone %> </td>
+      <td>+91-<%= cust.phone %> </td>
       <td class="address__of"><%= cust.address %> </td>
       <td>21</td>
       <td> <a href="#"><i class="fa-solid fa-cart-plus"></i></a> </td>
