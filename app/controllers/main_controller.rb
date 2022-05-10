@@ -22,6 +22,13 @@ class MainController < ApplicationController
     end
 
 
+
+    def show
+        # puts(params.require(:id))
+        @customer = Customer.find_by(id: params.require(:id))
+    end
+
+
     private
     def customer_params 
         params.require(:customer).permit(:name, :email, :phone, :address)
@@ -29,9 +36,7 @@ class MainController < ApplicationController
 
 
 
-    def show
-        @customer = Customer.find(params[:id])
-    end
+    
 
 
 

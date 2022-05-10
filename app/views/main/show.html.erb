@@ -1,1 +1,19 @@
-fdsfdasf <%= @customer%>
+<div class="container mt-5 p-5 shadow">
+
+    <div class="jumbotron">
+        <h1 class="display-4"><%= @customer.name %></h1>
+        <hr>
+        <p class="lead"><%= @customer.email %></p>
+        <p class="lead"><%= @customer.phone %></p>
+        <p class="lead"><%= @customer.address %></p>
+        <hr>
+        <%= link_to "Go Back", root_path %>
+       
+
+        
+    </div>
+
+
+</div>
+
+ 
