@@ -1,4 +1,4 @@
-class MainController < ApplicationController
+class CustomersController < ApplicationController
 
     before_action :authenticate_user!
 
@@ -48,8 +48,12 @@ class MainController < ApplicationController
     # Delete
 
 
-    def destroy
+    def delete
+        
         @customer = Customer.find_by(id: params.require(:format))  
+        puts("\n\n\nfasdfdsfsadfs")
+        puts(@customer.email)
+        puts("\n\n\n")
         @customer.destroy
         redirect_to(
           root_path,
