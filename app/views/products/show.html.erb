@@ -1,0 +1,39 @@
+<div class="container mt-5 p-5 shadow">
+
+    <div class="jumbotron">
+        <h1 class="display-4 w-75 m-auto"><%= @product.CompanyName %></h1>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center container w-75">
+            <div> 
+                <p class="lead"> <b>Model Name :</b> <%= @product.Model %></p>
+                <p class="lead"> <b>Stock Remaining :</b><%= @product.stock %></p>
+            </div>
+            <div> 
+                <p class="lead"> <b>Type of Device :</b><%= @product.device %></p>
+                <p class="lead"> <b>Product Price :</b> <%= @product.price %></p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="d-flex justify-content-between w-75 m-auto ">
+            <div class="d-flex justify-content-between ">
+                <a class="margin__right btn btn-success" href=/update-customer/<%= @product.id %> >Edit</a>
+                
+                <%= link_to "Delete", delete_customer_path(@product.id),method: :delete,data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+
+            </div>
+     
+            <%= link_to "Go Back",products_path , class: "btn btn-info"%>
+        </div>
+        <hr>
+        <h3 class="recent__orders"> Recent Orders</h3>
+        
+       
+
+        
+    </div>
+
+
+</div>
+
+ 
