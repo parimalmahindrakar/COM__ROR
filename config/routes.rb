@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get "/products", to: "products#index"
   get "/add-product", to:"products#new"
   post "/add-product", to:"products#create"
-  get "/show-product/", to:"products#show"
+  delete "/delete-product", to: "products#delete"
+  get "/update-product", to: "products#edit"
+  post "/update-product", to: "products#update"
 
   
 

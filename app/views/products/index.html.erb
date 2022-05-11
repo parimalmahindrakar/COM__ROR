@@ -11,6 +11,8 @@
       <th scope="col">Device</th>
       <th scope="col">Stock</th>
       <th scope="col">Price</th>
+      <th scope="col">Action</th>
+
     </tr>
   </thead>
   <tbody class="customer__infomations">
@@ -26,11 +28,26 @@
 
      <tr>
       <th scope="row"><%= product.id %></th>
-      <td> <%= link_to product.CompanyName, show_product_path(product.id) %> </td>
+      <td> <%= product.CompanyName %> </td>
       <td><%= product.Model %> </td>
       <td ><%= product.device %> </td>
       <td><%= product.stock %> </td>
-      <td ><%= product.price %> </td>
+      <td >₹ <%= product.price %>/- </td>
+      <td> 
+        
+        <%= link_to update_product_path(product.id) do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+          
+          &nbsp;&nbsp;&nbsp;
+
+        <%= link_to delete_product_path(product.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+
+
+        </td>
+
       
 
     </tr>
