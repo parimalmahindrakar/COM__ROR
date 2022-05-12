@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$("#add__order").click(()=>{
+  console.log("fcuk")
+})

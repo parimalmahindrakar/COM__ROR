@@ -19,8 +19,20 @@
     
 
     <div class="d-flex justify-content-between w-100 my-3 align-items-center">
-        <%= link_to "Add Product", add_product_path, class: "btn btn-info" %>
-        <%= link_to "Go back", root_path, class: "btn btn-info" %>
+        <div class="w-75"> 
+          <%= link_to "Add Product", add_product_path, class: "btn btn-info" %>
+          &nbsp; &nbsp; &nbsp; 
+          <%= link_to "Go back", root_path, class: "btn btn-info" %>
+        </div>
+
+        <%= form_tag(products_path, :method => "get",class:"d-inline-flex", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search by company name", class: "form-control w-25" %>
+
+          <%= button_tag(type: :submit, class: 'btn btn-info') do %>
+                      <i class="fa-solid fa-magnifying-glass"></i>
+          <% end %>
+        
+        <% end %>
     </div>
 
 

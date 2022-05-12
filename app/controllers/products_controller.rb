@@ -4,7 +4,13 @@ class ProductsController < ApplicationController
 
 
     def index
-        @product = Products.all
+
+        if params[:search]
+            @product = Products.search(params[:search])
+        else
+            @product = Products.all
+        end
+            
     end
 
     def new

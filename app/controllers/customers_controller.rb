@@ -3,9 +3,13 @@ class CustomersController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @customer = Customer.all()
+        if params[:search]
+            @customer = Customer.search(params[:search])
+        else
+            @customer = Customer.all
+            # @customers = Customer.all.order('created_at DESC')
+        end
     end
-
 
     def new
         @customer = Customer.new
@@ -51,9 +55,6 @@ class CustomersController < ApplicationController
     def delete
         
         @customer = Customer.find_by(id: params.require(:format))  
-        puts("\n\n\nfasdfdsfsadfs")
-        puts(@customer.email)
-        puts("\n\n\n")
         @customer.destroy
         redirect_to(
           root_path,
@@ -68,14 +69,6 @@ class CustomersController < ApplicationController
     def customer_params 
         params.require(:customer).permit(:name, :email, :phone, :address)
     end
-
-
-
-    
-
-
-
-
 
 
 

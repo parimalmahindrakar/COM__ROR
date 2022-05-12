@@ -2,9 +2,22 @@
 
 
 <div class=" my-3 d-flex justify-content-between">
+  <div>
+    <%= link_to "Add Customer", add_customer_path, class: "btn btn-info"%>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="btn btn-info" id="add__order" >Add Order</div>
+  </div>
+  
+     
+  <%= form_tag(root_path, :method => "get",class:"d-inline-flex", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by customer name", class: "form-control" %>
 
-  <%= link_to "Add Customer", add_customer_path, class: "btn btn-info"%>
-  <div class="btn btn-info ">Add Order</div>
+    <%= button_tag(type: :submit, class: 'btn btn-info') do %>
+                <i class="fa-solid fa-magnifying-glass"></i>
+    <% end %>
+   
+  <% end %>
+
 
 
 </div>
