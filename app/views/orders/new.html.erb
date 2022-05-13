@@ -1,0 +1,63 @@
+<div class="container mt-5 w-50 border p-5 shadow">
+
+    <h1 class="add__customer__heading mb-4">Add Order</h1>
+
+    <%= form_for @order, url:add_order_path do |form| %>
+
+
+        <% if @order.errors.any? %>
+            <div class="alert alert-danger">
+                <% @order.errors.full_messages.each do |message| %>
+                <div>
+                    <%= message  %>
+                </div>
+                <% end %>
+            </div>
+        <% end %>
+
+
+
+
+        <div class="mb-3">
+            <%= form.label :customer_id %>     <br>
+            <%= form.select :customer_id, Customer.all.collect{|cust| [cust.name, cust.id]}, include_blank:true, class: 'form-select' %>
+        </div>
+
+
+        <div class="mb-3">
+            <%= form.label :product_id %>   <br>
+            <%= form.select :product_id, Product.all.collect{|product| [product.companyname+" " +product.model, product.id]}, include_blank:true, class: 'form-select' %>
+        </div>
+
+
+        <div class="mb-3">
+            <%= form.label :quantity %>    
+           <%= form.number_field :quantity, class: "form-control", placeholder: "10" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label :status %>    
+           <%= form.text_field :status, class: "form-control", value: "pending" %>
+        </div>
+
+        
+
+
+
+
+       
+
+
+        <div class="w-100 text-center pt-3 d-flex justify-content-between align-items-center">
+            <%= form.submit "Add Order" ,class: "btn btn-primary ml-5" %>
+        </div>
+
+        <div class="text-left pt-3">
+        
+        </div>
+
+
+    <% end %>
+
+
+</div>

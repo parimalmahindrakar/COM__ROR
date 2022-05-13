@@ -1,10 +1,11 @@
+
+
+
 <div class="container mt-5">
 
 
 <div class=" my-3 d-flex justify-content-between">
   <div>
-    <%= link_to "Add Customer", add_customer_path, class: "btn btn-info"%>
-    &nbsp;&nbsp;&nbsp;&nbsp;
     <%= link_to "Add Order", add_order_path,class:"btn btn-info" %>
   </div>
   
@@ -27,12 +28,12 @@
   <thead>
     <tr>
       <th scope="col">Sr. No</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col" class="address__of">Address</th>
-      <th scope="col">Order Count</th>
-      <th scope="col">Add Order</th>
+      <th scope="col">Ordered by</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Ordered on</th>
+      <th scope="col">Status</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Amount</th>
 
     </tr>
   </thead>
@@ -40,16 +41,16 @@
     
 
 
-    <% @customer.each do |cust| %>
+    <% @orders.each  do |order| %>
 
      <tr>
-      <th scope="row"><%= cust.id %></th>
-      <td> <a href=/show-customer/<%= cust.id %>> <%= cust.name%> </a> </td>
-      <td><%= cust.email %> </td>
-      <td>+91-<%= cust.phone %> </td>
-      <td class="address__of"><%= cust.address %> </td>
-      <td><%=  cust.orders.count %></td>
-      <td> <a href="#"><i class="fa-solid fa-cart-plus"></i></a> </td>
+      <th scope="row"><%= order.id %></th>
+      <td> <%= Customer.returnCust(order.customer_id).name %> </a> </td>
+      <td><%= Product.returnProduct(order.product_id).companyname+" "+Product.returnProduct(order.product_id).model %> </td>
+      <td><%= order.created_at %> </td>
+      <td><%= order.status %> </td>
+      <td><%= order.quantity %></td>
+      <td> ₹<%= order.amount %>.0/- </td>
     </tr>
 
     <% end %>
@@ -65,3 +66,5 @@
 </table>
 
 </div>
+
+

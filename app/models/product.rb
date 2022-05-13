@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
 
+    has_many :orders, dependent: :destroy
+    
     validates :companyname, presence: true
     validates :model, presence: true
     validates :device,presence: true
@@ -8,6 +10,10 @@ class Product < ActiveRecord::Base
 
     def self.search(search)
         where("CompanyName LIKE ?", "%#{search}%")
+    end
+
+    def self.returnProduct(product_id)
+        Product.find_by(id:product_id)
     end
 
 end

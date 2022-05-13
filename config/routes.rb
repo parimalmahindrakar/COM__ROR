@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  # devise_for :users
+
   
+  # for Customers
+  # ===================================
   root "customers#index"
   get "/add-customer", to: "customers#new"
   post "/add-customer", to: "customers#create"
@@ -10,6 +12,10 @@ Rails.application.routes.draw do
   get "/update-customer/:id", to: "customers#edit"
   post "/update-customer", to: "customers#update"
   delete "/delete-customer/", to: "customers#delete"
+
+
+  # for Products
+  # ===================================
 
   get "/products", to: "products#index"
   get "/add-product", to:"products#new"
@@ -19,7 +25,11 @@ Rails.application.routes.draw do
   post "/update-product", to: "products#update"
 
   
-
+  # for Orders
+  # ===================================
+  get "/orders", to: "orders#index"
+  get "/add-order", to: "orders#new"
+  post "/add-order", to: "orders#create"
 
 
 
