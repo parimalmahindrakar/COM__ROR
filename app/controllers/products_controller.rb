@@ -6,19 +6,19 @@ class ProductsController < ApplicationController
     def index
 
         if params[:search]
-            @product = Products.search(params[:search])
+            @product = Product.search(params[:search])
         else
-            @product = Products.all
+            @product = Product.all
         end
             
     end
 
     def new
-        @product  = Products.new
+        @product  = Product.new
     end
 
     def create
-        @product = Products.new(products_params)
+        @product = Product.new(products_params)
         if @product.save
             redirect_to products_path, notice: "Successfully added product !"
         else
@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
 
 
     def delete
-        @product = Products.find_by(id: params.require(:format))  
+        @product = Product.find_by(id: params.require(:format))  
         @product.destroy
         redirect_to(
         products_path,
@@ -38,11 +38,11 @@ class ProductsController < ApplicationController
 
 
     def edit   
-        @product = Products.find_by(id: params.require(:format))    
+        @product = Product.find_by(id: params.require(:format))    
     end  
     
     def update   
-        @product = Products.find_by(id: params.require(:format))    
+        @product = Product.find_by(id: params.require(:format))    
         if @product.update_attributes(products_params)   
           flash[:notice] = 'Product details updated!'   
           redirect_to products_path   
@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
 
     private
     def products_params 
-        params.require(:products).permit(:CompanyName, :Model, :stock, :price, :device)
+        params.require(:product).permit(:companyname, :model, :stock, :price, :device)
     end
 
 

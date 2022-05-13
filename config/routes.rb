@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  # devise_for :users
   
   root "customers#index"
   get "/add-customer", to: "customers#new"

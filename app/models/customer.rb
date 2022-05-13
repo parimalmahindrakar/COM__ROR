@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+
+
     # has_many :orders, dependent: :destroy
     validates :name, length: { minimum: 10 }
     validates :email, presence: true, format: {with: /\A[^@\s]+@[^@\s]+\z/, message: "Enter the valid email address."}
