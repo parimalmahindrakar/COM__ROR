@@ -15,6 +15,11 @@
 //= require turbolinks
 //= require_tree .
 
-$("#add__order").click(()=>{
-  console.log("fcuk")
-})
+var list;
+console.log("fadsfdsf")
+list = document.getElementsByTagName("select");
+for (var i = 0; i < list.length; ++i) {
+   list[i].classList.add('form-select');
+   console.log("fadsfdsf")
+}
+  console.log(list)

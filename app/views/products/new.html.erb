@@ -37,11 +37,12 @@
             <%= form.text_field :price, class: "form-control", placeholder: "42000" %>
         </div>
          <div class="mb-3">
-            <%= form.label :device %>    
-           <%= form.text_field :device, class: "form-control", placeholder: "Laptop" %>
+            <%= form.label :device %>   <br> 
+            <%= form.select :device, [["Laptop", "Laptop"], ["Mobile","Mobile"], ["TV", "TV"], ["Tablet", "Tablet"]], include_blank:true, class: 'form-select' %>
         </div>
 
         
+
 
 
 

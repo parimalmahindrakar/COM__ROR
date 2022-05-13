@@ -21,8 +21,7 @@
     <div class="d-flex justify-content-between w-100 my-3 align-items-center">
         <div class="w-75"> 
           <%= link_to "Add Product", add_product_path, class: "btn btn-info" %>
-          &nbsp; &nbsp; &nbsp; 
-          <%= link_to "Go back", root_path, class: "btn btn-info" %>
+          
         </div>
 
         <%= form_tag(products_path, :method => "get",class:"d-inline-flex", id: "search-form") do %>

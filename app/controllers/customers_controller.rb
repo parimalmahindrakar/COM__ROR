@@ -27,6 +27,7 @@ class CustomersController < ApplicationController
 
     def show
         @customer = Customer.find_by(id: params.require(:id))
+        @orders = @customer.orders.all
     end
 
 
