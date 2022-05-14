@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
     
     def update   
         @order = Order.find_by(id: params.require(:format))    
-        if updateStockForUpdation() == 0
+        if updateStockForUpdation() 
             if @order.update_attributes(orders_params)   
                 flash[:notice] = 'Order details updated!'   
                 redirect_to orders_path   
@@ -97,31 +97,27 @@ class OrdersController < ApplicationController
         product_id = params[:order].require('product_id')
         product = Product.find_by(id: product_id)
         order = Order.find_by(id: params.require(:format))
-        quantity_ = params[:order].require('quantity')
         quantityBeforeUpdate = order.quantity
         quantityAfterUpdate = params[:order].require('quantity')
 
-        puts("quantityBeforeUpdate : ", quantityBeforeUpdate)
-        puts("quantityAfterUpdate : ", quantityAfterUpdate )
-
-
         if quantityBeforeUpdate.to_i >= quantityAfterUpdate.to_i
-
             stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
             if product.update_attribute(:stock, stockUpdated)
-                return 0
+                return true
             else
-                puts(product.stock.to_i, "is less than", (quantityBeforeUpdate.to_i -  quantityAfterUpdate.to_i).abs)
                 return false
             end
-
-        end
-
-        if product.stock.to_i < (quantityBeforeUpdate.to_i -  quantityAfterUpdate.to_i).abs
-            puts("fasdfajdsfklfjadskfl;jfklsdfjdkl;fasjl;s")
+        elsif product.stock.to_i < (quantityAfterUpdate.to_i - quantityBeforeUpdate.to_i ).abs
             return false
+        else 
+            stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
+            if product.update_attribute(:stock, stockUpdated)
+                return true
+            else
+                return false
+            end
         end
-        
+
     end
 
     def updateStockForDeletion
