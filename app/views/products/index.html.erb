@@ -37,7 +37,11 @@
 
     <% @product.each do |product| %>
 
-     <tr>
+     <tr 
+        <% if product.stock.to_i <= 0 %>
+          class="alert-danger"
+        <%end%>
+     >
       <th scope="row"><%= product.id %></th>
       <td> <%= product.companyname %> </td>
       <td><%= product.model %> </td>

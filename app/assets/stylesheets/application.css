@@ -47,3 +47,10 @@ h3.recent__orders {
     margin-right: 20px;
 }
 
+tbody {
+    height: 50px !important;
+    overflow-y: scroll;
+}
+.fa-trash-can {
+    color: red;
+}

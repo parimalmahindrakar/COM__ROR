@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
 
+    before_action :authenticate_user!
+    
 
     def index
         @orders = Order.all
@@ -12,14 +14,50 @@ class OrdersController < ApplicationController
     end
 
     def create
-
         @order = Order.new(orders_params)
-        if @order.save
-            redirect_to orders_path, notice: "Successfully added order !"
+        if updateStockForCreation()
+            if @order.save
+                redirect_to orders_path, notice: "Successfully added order !"
+            else
+                render 'new'
+            end
         else
-            render 'new'
-        end
+            flash[:alert] = 'Quantity is greater than available stock !'   
+            render :new
+        end 
 
+    end
+
+    def edit   
+        @order = Order.find_by(id: params.require(:format))    
+    end  
+    
+    def update   
+        @order = Order.find_by(id: params.require(:format))    
+        if updateStockForUpdation()
+            if @order.update_attributes(orders_params)   
+                flash[:notice] = 'Order details updated!'   
+                redirect_to orders_path   
+            else   
+                flash[:alert] = 'Failed to update details of order !'   
+                render :edit   
+            end 
+        else   
+            flash[:alert] = 'Product stock is 0'   
+            render :edit   
+        
+        end
+    end
+
+    def delete
+        if updateStockForDeletion()
+            @order = Order.find_by(id: params.require(:format))  
+            @order.destroy
+            redirect_to(
+            orders_path,
+            notice: 'Order successfully deleted.'
+            )
+        end
     end
 
 
@@ -37,7 +75,58 @@ class OrdersController < ApplicationController
         quantity.to_i * originalPrice
     end
 
+
+    def updateStockForCreation
+        product_id = params[:order].require('product_id')
+        quantity = params[:order].require('quantity')
+        product = Product.find_by(id: product_id)  
+        if quantity.to_i > product.stock.to_i
+            return false
+        else
+            stockUpdated = product.stock.to_i - quantity.to_i
+            if product.update_attribute(:stock, stockUpdated)
+                return true
+            else
+                return false
+            end
+        end
+    end
+
+
+    def updateStockForUpdation
+        product_id = params[:order].require('product_id')
+        product = Product.find_by(id: product_id)
+        quantity_ = params[:order].require('quantity')
+
+        if product.stock.to_i < 0 
+            return false
+        else
+            order = Order.find_by(id: params.require(:format))
+            quantityBeforeUpdate = order.quantity
+            quantityAfterUpdate = params[:order].require('quantity')
+            stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
+            if product.update_attribute(:stock, stockUpdated)
+                return true
+            else
+                return false
+            end
+        end
         
+    end
+
+    def updateStockForDeletion
+        order = Order.find_by(id: params.require(:format))
+        product = Product.find_by(id: order.product_id) 
+        quantityBeforeUpdate = order.quantity
+        stockUpdated = product.stock + quantityBeforeUpdate
+         
+        if product.update_attribute(:stock, stockUpdated)
+            return true
+        else
+            return false
+        end
+        
+    end
 
 
 

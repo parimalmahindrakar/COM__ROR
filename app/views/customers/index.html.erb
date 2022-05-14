@@ -36,32 +36,24 @@
 
     </tr>
   </thead>
-  <tbody class="customer__infomations">
-    
 
 
-    <% @customer.each do |cust| %>
-
-     <tr>
-      <th scope="row"><%= cust.id %></th>
-      <td> <a href=/show-customer/<%= cust.id %>> <%= cust.name%> </a> </td>
-      <td><%= cust.email %> </td>
-      <td>+91-<%= cust.phone %> </td>
-      <td class="address__of"><%= cust.address %> </td>
-      <td><%=  cust.orders.count %></td>
-      <td> <a href="#"><i class="fa-solid fa-cart-plus"></i></a> </td>
-    </tr>
-
-    <% end %>
-
+    <tbody>
+      <% @customer.each do |cust| %>
+      <tr>
+        <th scope="row"><%= cust.id %></th>
+        <td> <a href=/show-customer/<%= cust.id %>> <%= cust.name%> </a> </td>
+        <td><%= cust.email %> </td>
+        <td>+91-<%= cust.phone %> </td>
+        <td class="address__of"><%= cust.address %> </td>
+        <td><%=  cust.orders.count %></td>
+        <td> <a href="#"><i class="fa-solid fa-cart-plus"></i></a> </td>
+      </tr>
+      <% end %>
+    </tbody>
 
 
 
-
-   
-
-    
-  </tbody>
 </table>
 
 </div>

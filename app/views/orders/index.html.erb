@@ -30,10 +30,13 @@
       <th scope="col">Sr. No</th>
       <th scope="col">Ordered by</th>
       <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
       <th scope="col">Ordered on</th>
       <th scope="col">Status</th>
       <th scope="col">Quantity</th>
       <th scope="col">Amount</th>
+      <th scope="col">Action</th>
+
 
     </tr>
   </thead>
@@ -47,10 +50,26 @@
       <th scope="row"><%= order.id %></th>
       <td> <%= Customer.returnCust(order.customer_id).name %> </a> </td>
       <td><%= Product.returnProduct(order.product_id).companyname+" "+Product.returnProduct(order.product_id).model %> </td>
+      <td>₹<%= Product.returnProduct(order.product_id).price %>/- </td>
       <td><%= order.created_at %> </td>
       <td><%= order.status %> </td>
       <td><%= order.quantity %></td>
       <td> ₹<%= order.amount %>.0/- </td>
+      <td> 
+        
+        <%= link_to update_order_path(order.id) do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+          
+          &nbsp;&nbsp;
+
+        <%= link_to delete_order_path(order.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+
+
+        </td>
+
     </tr>
 
     <% end %>

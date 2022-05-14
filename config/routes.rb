@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   get "/orders", to: "orders#index"
   get "/add-order", to: "orders#new"
   post "/add-order", to: "orders#create"
+  get "/update-order", to: "orders#edit"
+  post "/update-order", to: "orders#update"
+  delete "/delete-order", to: "orders#delete"
 
 
 
