@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
     
     def update   
         @order = Order.find_by(id: params.require(:format))    
-        if updateStockForUpdation()
+        if updateStockForUpdation() == 0
             if @order.update_attributes(orders_params)   
                 flash[:notice] = 'Order details updated!'   
                 redirect_to orders_path   
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
                 render :edit   
             end 
         else   
-            flash[:alert] = 'Product stock is 0'   
+            flash[:alert] = 'Quantity is greater than available stock !'   
             render :edit   
         
         end
@@ -96,20 +96,30 @@ class OrdersController < ApplicationController
     def updateStockForUpdation
         product_id = params[:order].require('product_id')
         product = Product.find_by(id: product_id)
+        order = Order.find_by(id: params.require(:format))
         quantity_ = params[:order].require('quantity')
+        quantityBeforeUpdate = order.quantity
+        quantityAfterUpdate = params[:order].require('quantity')
 
-        if product.stock.to_i < 0 
-            return false
-        else
-            order = Order.find_by(id: params.require(:format))
-            quantityBeforeUpdate = order.quantity
-            quantityAfterUpdate = params[:order].require('quantity')
+        puts("quantityBeforeUpdate : ", quantityBeforeUpdate)
+        puts("quantityAfterUpdate : ", quantityAfterUpdate )
+
+
+        if quantityBeforeUpdate.to_i >= quantityAfterUpdate.to_i
+
             stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
             if product.update_attribute(:stock, stockUpdated)
-                return true
+                return 0
             else
+                puts(product.stock.to_i, "is less than", (quantityBeforeUpdate.to_i -  quantityAfterUpdate.to_i).abs)
                 return false
             end
+
+        end
+
+        if product.stock.to_i < (quantityBeforeUpdate.to_i -  quantityAfterUpdate.to_i).abs
+            puts("fasdfajdsfklfjadskfl;jfklsdfjdkl;fasjl;s")
+            return false
         end
         
     end
