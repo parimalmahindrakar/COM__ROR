@@ -94,28 +94,79 @@ class OrdersController < ApplicationController
 
 
     def updateStockForUpdation
+
+        # find the damn product !
         product_id = params[:order].require('product_id')
         product = Product.find_by(id: product_id)
+
         order = Order.find_by(id: params.require(:format))
+
         quantityBeforeUpdate = order.quantity
         quantityAfterUpdate = params[:order].require('quantity')
 
-        if quantityBeforeUpdate.to_i >= quantityAfterUpdate.to_i
-            stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
-            if product.update_attribute(:stock, stockUpdated)
-                return true
-            else
+        productIdBeforeUpdate = order.product_id
+        productIdAfterUpdate = params[:order].require('product_id')
+
+        if productIdAfterUpdate.to_i == productIdBeforeUpdate.to_i
+
+            if quantityBeforeUpdate.to_i >= quantityAfterUpdate.to_i
+                stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
+                if product.update_attribute(:stock, stockUpdated)
+                    return true
+                else
+                    return false
+                end
+            elsif product.stock.to_i < (quantityAfterUpdate.to_i - quantityBeforeUpdate.to_i ).abs
                 return false
+            else 
+                stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
+                if product.update_attribute(:stock, stockUpdated)
+                    return true
+                else
+                    return false
+                end
             end
-        elsif product.stock.to_i < (quantityAfterUpdate.to_i - quantityBeforeUpdate.to_i ).abs
-            return false
-        else 
-            stockUpdated = product.stock + (quantityBeforeUpdate.to_i - quantityAfterUpdate.to_i)
-            if product.update_attribute(:stock, stockUpdated)
-                return true
-            else
+        
+        else
+
+            # samsung total stock is 10 to => got  => 7
+            # lenovo total stock is 10 => got  => 7
+
+            productBefore = Product.find_by(id: productIdBeforeUpdate.to_i) # samsung contained 3
+            productAfter = Product.find_by(id: productIdAfterUpdate.to_i) # lenovo to update 3 more
+
+            # so samsung will be again 10
+            # and lenovo will be 7-3 => 4
+
+            if quantityAfterUpdate.to_i > productAfter.stock
                 return false
+            else
+                if quantityAfterUpdate == quantityBeforeUpdate
+
+                    newStockForAfterProduct = productAfter.stock - quantityAfterUpdate.to_i
+                    newStockForBeforeProduct = productBefore.stock +  quantityAfterUpdate.to_i
+
+                    if productBefore.update_attribute(:stock, newStockForBeforeProduct ) &&  productAfter.update_attribute(:stock, newStockForAfterProduct)
+                        return true
+                    else
+                        return false
+                    end
+                else
+                    newStockForAfterProduct = productAfter.stock - quantityAfterUpdate.to_i
+                    newStockForBeforeProduct = productBefore.stock +  quantityBeforeUpdate.to_i
+
+                    if productBefore.update_attribute(:stock, newStockForBeforeProduct ) &&  productAfter.update_attribute(:stock, newStockForAfterProduct)
+                        return true
+                    else
+                        return false
+                    end
+
+
+
+                end
+
             end
+
         end
 
     end
@@ -131,11 +182,7 @@ class OrdersController < ApplicationController
         else
             return false
         end
-        
     end
-
-
-
 
 
 

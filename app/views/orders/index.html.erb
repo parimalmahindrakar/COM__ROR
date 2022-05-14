@@ -46,7 +46,13 @@
 
     <% @orders.each  do |order| %>
 
-     <tr>
+     <tr
+     
+        <% if order.status == "Completed" %>
+          class ="alert alert-success"
+        <%end%>
+     
+     >
       <th scope="row"><%= order.id %></th>
       <td> <%= Customer.returnCust(order.customer_id).name %> </a> </td>
       <td><%= Product.returnProduct(order.product_id).companyname+" "+Product.returnProduct(order.product_id).model %> </td>
