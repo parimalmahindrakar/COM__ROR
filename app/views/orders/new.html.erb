@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <%= form.label :customer_id %>     <br>
-            <%= form.select :customer_id, Customer.all.collect{|cust| [cust.name, cust.id]}, include_blank:true, class: 'form-select' %>
+            <%= form.select :customer_id, Customer.all.collect{|cust| [cust.name, cust.id]}, include_blank:true, value:"Select",  class: 'form-select' %>
         </div>
 
 

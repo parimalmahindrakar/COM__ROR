@@ -38,7 +38,7 @@
         </div>
         <div class="mb-3">
             <%= form.label :price %>    
-            <%= form.text_field :price, class: "form-control", value: @product.price %>
+            <%= form.number_field :price, class: "form-control", value: @product.price.to_i %>
         </div>
 
 

@@ -4,16 +4,22 @@ class OrdersController < ApplicationController
     
 
     def index
+        # if params[:search]
+        #     @order = Order.search(params[:search])
+        # else
+        #     @order = Order.all
+        #     # @customers = Customer.all.order('created_at DESC')
+        # end
         @orders = Order.all
     end
 
 
     def new
         @order = Order.new
-
     end
 
     def create
+        
         @order = Order.new(orders_params)
         if updateStockForCreation()
             if @order.save
@@ -69,6 +75,7 @@ class OrdersController < ApplicationController
     end
 
     def calculateAmt
+        
         product_id = params[:order].require('product_id')
         quantity = params[:order].require('quantity')
         originalPrice = Product.find_by(id: product_id).price
@@ -77,6 +84,7 @@ class OrdersController < ApplicationController
 
 
     def updateStockForCreation
+
         product_id = params[:order].require('product_id')
         quantity = params[:order].require('quantity')
         product = Product.find_by(id: product_id)  
@@ -161,8 +169,6 @@ class OrdersController < ApplicationController
                         return false
                     end
 
-
-
                 end
 
             end
@@ -170,6 +176,9 @@ class OrdersController < ApplicationController
         end
 
     end
+
+
+    
 
     def updateStockForDeletion
         order = Order.find_by(id: params.require(:format))
