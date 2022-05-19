@@ -9,6 +9,7 @@ class Order < ActiveRecord::Base
     validates :status, presence: true
     validates :customer_id, presence: true
     validates :product_id, presence: true
+    
 
 
     def self.search(search)
