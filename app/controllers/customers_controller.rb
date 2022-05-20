@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
 
     def index
         if params[:search]
-            @customer = Customer.search(params[:search])
+            @customer = Customer.search(params[:search]).paginate(:page => params[:page],per_page: 5)
         else
             # @customer = Customer.all
             @customer = Customer.paginate(:page => params[:page],per_page: 10)

@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     def index
 
         if params[:search]
-            @product = Product.search(params[:search])
+            @product = Product.search(params[:search]).paginate(:page => params[:page],per_page: 5)
         else
             # @product = Product.all
             @product = Product.paginate(:page => params[:page],per_page: 10)
