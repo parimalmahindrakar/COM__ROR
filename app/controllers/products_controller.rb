@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
 
 
     def index
@@ -8,7 +8,8 @@ class ProductsController < ApplicationController
         if params[:search]
             @product = Product.search(params[:search])
         else
-            @product = Product.all
+            # @product = Product.all
+            @product = Product.paginate(:page => params[:page],per_page: 10)
         end
             
     end

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     
 
     def index
@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
         #     @order = Order.all
         #     # @customers = Customer.all.order('created_at DESC')
         # end
-        @orders = Order.all
+        # @orders = Order.all
+        @orders = Order.paginate(:page => params[:page],per_page: 10)
     end
 
 

@@ -38,9 +38,10 @@
 
 
     <tbody>
+    <% i=1 %>
       <% @customer.each do |cust| %>
       <tr>
-        <th scope="row"><%= cust.id %></th>
+        <th scope="row"><%= i %></th>
         <td> <a href=/show-customer/<%= cust.id %>> <%= cust.name%> </a> </td>
         <td><%= cust.email %> </td>
         <td>+91-<%= cust.phone %> </td>
@@ -50,11 +51,17 @@
 
 
       </tr>
+      <% i=i+1 %>
       <% end %>
+      
     </tbody>
+    
 
 
 
 </table>
 
+  <div class="pagination alert-info">
+      <%= will_paginate @customer, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>

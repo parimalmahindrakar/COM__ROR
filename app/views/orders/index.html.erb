@@ -43,7 +43,7 @@
   <tbody class="customer__infomations">
     
 
-
+    <% i=1 %>
     <% @orders.each  do |order| %>
 
      <tr
@@ -53,7 +53,7 @@
         <%end%>
      
      >
-      <th scope="row"><%= order.id %></th>
+      <th scope="row"><%= i %></th>
       <td> <%= Customer.returnCust(order.customer_id).name %> </a> </td>
       <td><%= Product.returnProduct(order.product_id).companyname+" "+Product.returnProduct(order.product_id).model %> </td>
       <td>₹<%= Product.returnProduct(order.product_id).price %>/- </td>
@@ -78,6 +78,8 @@
 
     </tr>
 
+     <% i=i+1 %>
+
     <% end %>
 
 
@@ -89,6 +91,9 @@
     
   </tbody>
 </table>
+
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+
 
 </div>
 

@@ -1,12 +1,13 @@
 class CustomersController < ApplicationController
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
 
     def index
         if params[:search]
             @customer = Customer.search(params[:search])
         else
-            @customer = Customer.all
+            # @customer = Customer.all
+            @customer = Customer.paginate(:page => params[:page],per_page: 10)
             # @customers = Customer.all.order('created_at DESC')
         end
     end

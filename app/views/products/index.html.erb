@@ -34,7 +34,7 @@
         <% end %>
     </div>
 
-
+    <% i=1 %>
     <% @product.each do |product| %>
 
      <tr 
@@ -42,7 +42,7 @@
           class="alert-danger"
         <%end%>
      >
-      <th scope="row"><%= product.id %></th>
+      <th scope="row"><%= i %></th>
       <td> <%= product.companyname %> </td>
       <td><%= product.model %> </td>
       <td ><%= product.device %> </td>
@@ -66,6 +66,7 @@
       
 
     </tr>
+    <% i=i+1 %>
 
     <% end %>
 
@@ -78,5 +79,7 @@
     
   </tbody>
 </table>
+      <%= will_paginate @product, renderer: BootstrapPagination::Rails %>
+
 
 </div>
