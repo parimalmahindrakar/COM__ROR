@@ -34,7 +34,10 @@
         <% end %>
     </div>
 
-    <% i=1 %>
+    <% 
+        pagenumber = params[:page].to_i  == 0 ? 1 : params[:page].to_i
+        i = (pagenumber - 1).abs*10 + 1 
+    %>
     <% @product.each do |product| %>
 
      <tr 

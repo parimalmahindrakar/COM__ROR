@@ -3,7 +3,6 @@ class Product < ActiveRecord::Base
     has_many :orders, dependent: :destroy
     
     validates :companyname, presence: true
-    validates :model, presence: true
     validates :device,presence: true
     validates :stock,  presence: true, numericality: {
             only_integer: true,
@@ -12,7 +11,12 @@ class Product < ActiveRecord::Base
     validates :price, presence: true, numericality: {
         only_integer: true,
         greater_than_or_equal_to: 0
-  }
+    }
+
+
+    validates :model, 
+          :presence => {:message => "can't be blank." },
+          :uniqueness => {:message => "already exists."}
 
     def self.search(search)
         where("CompanyName LIKE ?", "%#{search}%")

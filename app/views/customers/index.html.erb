@@ -38,7 +38,13 @@
 
 
     <tbody>
-    <% i=1 %>
+    
+    <% 
+        pagenumber = params[:page].to_i  == 0 ? 1 : params[:page].to_i
+        i = (pagenumber - 1).abs*10 + 1 
+    %>
+
+
       <% @customer.each do |cust| %>
       <tr>
         <th scope="row"><%= i %></th>
