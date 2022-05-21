@@ -55,15 +55,7 @@ section.signup__section{
                 
             }
         }
-
-        
-
-
     }
-
-
-
-
 }
 
 div.checkbox__login {
@@ -73,4 +65,17 @@ div.checkbox__login {
     input[type="checkbox"] {
         width: 30px !important;
     }
+}
+
+
+
+i.fa-arrow-up, i.fa-arrow-down {
+    color: #555;
+    cursor: pointer;
+    font-size: 12px;
+
+    &:active {
+        color: red;
+    }
+    
 }

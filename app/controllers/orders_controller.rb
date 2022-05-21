@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
     
 
     def index
+        if params[:orderby] && params[:ordering]
+            @orders = Order.order("#{params[:orderby]} #{params[:ordering]}").paginate(:page => params[:page],per_page: 10)
+            render :index
+        end
         # if params[:search]
         #     @order = Order.search(params[:search])
         # else

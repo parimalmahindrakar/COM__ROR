@@ -31,10 +31,107 @@
       <th scope="col">Ordered by</th>
       <th scope="col">Product Name</th>
       <th scope="col">Product Price</th>
-      <th scope="col">Ordered on</th>
-      <th scope="col">Status</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Amount</th>
+      <th scope="col">
+      
+           <div class=" w-75 d-flex justify-content-between align-items-center m-auto">
+
+            <span>Ordered On</span>
+
+
+            <div class="sorting__functionality">
+             
+             <%= link_to orders_path({orderby: "created_at", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to orders_path({orderby: "created_at", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      
+      </th>
+      <th scope="col">
+
+         <div class=" d-flex justify-content-between align-items-center m-auto">
+
+            <span>Status</span>
+
+
+            <div class="sorting__functionality">
+             
+             <%= link_to orders_path({orderby: "status", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to orders_path({orderby: "status", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      </th>
+      <th scope="col">
+
+
+         <div class=" d-flex justify-content-between align-items-center m-auto">
+
+            <span>Quantity</span>
+
+
+            <div class="sorting__functionality">
+             
+             <%= link_to orders_path({orderby: "quantity", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to orders_path({orderby: "quantity", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      </th>
+      <th scope="col">
+
+         <div class=" d-flex justify-content-between align-items-center m-auto">
+
+            <span>Amount</span>
+
+
+            <div class="sorting__functionality">
+             
+             <%= link_to orders_path({orderby: "amount", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to orders_path({orderby: "amount", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      </th>
       <th scope="col">Action</th>
 
 

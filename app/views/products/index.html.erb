@@ -6,11 +6,83 @@
   <thead>
     <tr>
       <th scope="col">Sr. No</th>
-      <th scope="col">Company Name</th>
+      <th scope="col">
+      
+           <div class=" w-75 d-flex justify-content-between align-items-center m-auto">
+
+            <span>Company Name</span>
+
+
+            <div class="sorting__functionality">
+             
+             <%= link_to products_path({orderby: "companyname", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to products_path({orderby: "companyname", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      </th>
       <th scope="col">Model</th>
       <th scope="col">Device</th>
-      <th scope="col">Stock</th>
-      <th scope="col">Price</th>
+      <th scope="col">
+
+        <div class=" w-75 d-flex justify-content-between align-items-center m-auto">
+
+            <span>Stock</span>
+
+            <div class="sorting__functionality">
+             
+             <%= link_to products_path({orderby: "stock", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to products_path({orderby: "stock", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      </th>
+      <th scope="col">
+
+
+         <div class=" w-50 d-flex justify-content-between align-items-center m-auto">
+
+            <span>Price</span>
+
+            <div class="sorting__functionality">
+             
+             <%= link_to products_path({orderby: "price", ordering: "asc"}) do %>
+                <i class="fa-solid fa-arrow-up"></i>
+              <% end %>
+
+                <%= link_to products_path({orderby: "price", ordering: "desc"}) do %>
+                <i class="fa-solid fa-arrow-down"></i>
+              <% end %>
+
+
+
+            </div>
+
+          </div>
+      
+      
+      
+      </th>
       <th scope="col">Action</th>
 
     </tr>
