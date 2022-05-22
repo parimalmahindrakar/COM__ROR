@@ -4,13 +4,6 @@ class OrdersController < ApplicationController
     
 
     def index
-        # if params[:search]
-        #     @order = Order.search(params[:search])
-        # else
-        #     @order = Order.all
-        #     # @customers = Customer.all.order('created_at DESC')
-        # end
-        # @orders = Order.all
         @orders = Order.paginate(:page => params[:page],per_page: 10)
     end
 
