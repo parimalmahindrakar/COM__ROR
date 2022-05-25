@@ -2,13 +2,13 @@ require 'net/http'
 require 'json'
 
 uri_customers = URI("https://raw.githubusercontent.com/rst1211/Customer-Order-Management/JsonFiles/customers__list.json")
-uri_products = URI("https://raw.githubusercontent.com/rst1211/Customer-Order-Management/JsonFiles/products__lists.json")
+# uri_products = URI("https://raw.githubusercontent.com/rst1211/Customer-Order-Management/JsonFiles/products__lists.json")
 
 response_customers = Net::HTTP.get(uri_customers)
-response_products = Net::HTTP.get(uri_products)
+# response_products = Net::HTTP.get(uri_products)
 
 customer_list = JSON.parse(response_customers)
-produt_list = JSON.parse(response_products)
+# produt_list = JSON.parse(response_products)
 
 customer_list.length.times do |i| 
 
@@ -25,19 +25,19 @@ customer_list.length.times do |i|
 end
 
 
-produt_list.length.times do |i| 
+# produt_list.length.times do |i| 
 
-    product = Product.create(
+#     product = Product.create(
 
-        companyname: produt_list[i]["companyname"],
-        model: produt_list[i]["model"],
-        stock: produt_list[i]["stock"],
-        price: produt_list[i]["price"],
-        device: produt_list[i]["device"]
+#         companyname: produt_list[i]["companyname"],
+#         model: produt_list[i]["model"],
+#         stock: produt_list[i]["stock"],
+#         price: produt_list[i]["price"],
+#         device: produt_list[i]["device"]
 
 
-    )
-    puts "added #{produt_list[i]["companyname"]}"
+#     )
+#     puts "added #{produt_list[i]["companyname"]}"
 
-end
+# end
 
