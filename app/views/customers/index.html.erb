@@ -10,13 +10,8 @@
   </div>
   
      
-  <%= form_tag(root_path, :method => "get",class:"d-inline-flex", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search by customer name", class: "form-control" %>
-    <%= button_tag(type: :submit, class: 'btn btn-info') do %>
-                <i class="fa-solid fa-magnifying-glass"></i>
-    <% end %>
-   
-  <% end %>
+    <input type="text" class="searchCustName" placeholder="Search by customer name" />
+
 
 
 

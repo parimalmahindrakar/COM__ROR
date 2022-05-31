@@ -18,6 +18,13 @@ class CustomersController < ApplicationController
             customer = current_user.customers.order("#{dataOrderingSplitted[1]} #{dataOrderingSplitted[0]}")
             render :json => {:customerInfo => customer}
         end
+
+        if params[:searchValue]
+            searchValue = params[:searchValue]
+            customer =  current_user.customers.search(searchValue)
+            render :json => {:customerInfo => customer}
+
+        end
        
         
     end
